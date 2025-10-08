@@ -30,3 +30,6 @@ Verify:
 1) _appLinks.getInitialLink() called in initState() (cold start)
 2) _appLinks.uriLinkStream.listen() active (hot start)
 3) _handleIncomingLink() actually navigates
+
+summary
+deep liking help connect the android's intent filter with flutter navigation so that the android can capture custom URLs through manifest consifguration, then the app_links package streams these URLs to Flutter where they trigger Navigator.push() actions to specific screens. one of the scenario where deep linking is useful for push notification, when users tap a notification about a product sale, the deep link myapp://product/123 instantly opens that specific product page instead of the home screen, improving user experience and engagement. the challenges that i faced while making this is mostly trying to modernized the app from the tutorial given to me, to solve this i use CoPilot to help me make the modernized versions and help with any errors i faced while making this
