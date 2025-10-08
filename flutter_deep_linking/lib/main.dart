@@ -55,8 +55,19 @@ class _MyAppState extends State<MyApp> {
           MaterialPageRoute(builder: (context) => DetailScreen(id: id)),
         );
       });
+    } else if (uri.host == 'profile') {
+      // Example link: myapp://profile/alex
+      final username = uri.pathSegments.isNotEmpty ? uri.pathSegments[0] : 'unknown';
+      print('DEBUG: Navigating to ProfileScreen with username: $username');
+      
+      // Use Future.delayed to ensure navigation happens after the current frame
+      Future.delayed(Duration(milliseconds: 100), () {
+        _navigatorKey.currentState?.push(
+          MaterialPageRoute(builder: (context) => ProfileScreen(username: username)),
+        );
+      });
     } else {
-      print('DEBUG: Host does not match "details", got: ${uri.host}');
+      print('DEBUG: Host does not match "details" or "profile", got: ${uri.host}');
     }
   }
 
@@ -90,6 +101,19 @@ class DetailScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text('Details')),
       body: Center(child: Text('You opened item ID: $id')),
+    );
+  }
+}
+
+class ProfileScreen extends StatelessWidget {
+  final String username;
+  const ProfileScreen({required this.username});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Profile')),
+      body: Center(child: Text('Hello, $username!')),
     );
   }
 }
